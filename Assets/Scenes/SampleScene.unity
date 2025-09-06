@@ -5041,7 +5041,7 @@ MonoBehaviour:
   lookSensitivity: 2
   pitchMin: -89
   pitchMax: 89
-  crouchHeight: 1.6
+  crouchHeight: 1.75
   crouchMoveSpeed: 3
   startPosition: {x: 2.5, y: 2.6, z: -1.7}
   startRotation: {x: 10, y: 0, z: 0}

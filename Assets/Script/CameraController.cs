@@ -28,7 +28,7 @@ public class CameraController : MonoBehaviour
 
 
     // 座りモーション用
-    private bool isCrouching = false;
+    private bool isCrouching = true;
     private float targetY;
     // マウスルック用
     float yaw;
@@ -41,6 +41,8 @@ public class CameraController : MonoBehaviour
         // 初期回転を設定
         yaw = startRotation.y;
         pitch = startRotation.x;
+
+        targetY = crouchHeight; // 初期状態は座った状態
     }
     void Start()
     {
@@ -111,7 +113,7 @@ public class CameraController : MonoBehaviour
         transform.position += move * speed * Time.deltaTime;
 
         // 座りモーション（Cキーでy座標を下げる）
-        // HandleCrouch();
+        HandleCrouch();
     }
 
     private void HandleCrouch()
@@ -119,14 +121,14 @@ public class CameraController : MonoBehaviour
         // Cキーで座る
         if (Input.GetKeyDown(KeyCode.C) && !isCrouching)
         {
-            isCrouching = true;
             targetY = crouchHeight;
+            isCrouching = true;
         }
         // Cキーで立つ
         else if (Input.GetKeyDown(KeyCode.C) && isCrouching)
         {
-            isCrouching = false;
             targetY = startPosition.y;
+            isCrouching = false;
         }
 
         // 毎フレーム目標座標へ移動
