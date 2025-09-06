@@ -19,11 +19,13 @@ public class CameraController : MonoBehaviour
     [SerializeField] float pitchMax = 89f;
     [Header("座りモーション設定")]
     [SerializeField] private float crouchHeight = 1.75f; // 座った時の高さ
-    [SerializeField] float crouchMoveSpeed = 3f; // 座りモーションのスピード
+    [SerializeField] float crouchMoveSpeed = 2f; // 座りモーションのスピード
 
     [Header("その他設定")]
+
+    [SerializeField] float startMoveForward = 0.5f; // 前進量
     // 開始位置を指定
-    public Vector3 startPosition = new Vector3(2.5f, 2.6f, -1.7f);
+    public Vector3 startPosition = new Vector3(2.5f, 2.6f, -2f);
     public Vector3 startRotation = new Vector3(10, 0, 0);
 
 
@@ -35,6 +37,10 @@ public class CameraController : MonoBehaviour
     float pitch;
     // UI表示状態（他のスクリプトで管理する想定）
     public static bool IsUIActive = true;
+    
+    // 追加: 最初だけ前進するための変数
+    private Vector3 targetPosition;
+    private bool isMovingForwardAndCrouching = true;
 
     void Awake()
     {
@@ -50,6 +56,10 @@ public class CameraController : MonoBehaviour
         transform.position = startPosition;
         // カメラの向きを設定
         transform.rotation = Quaternion.Euler(startRotation);
+
+        // 少し前方の目標位置を設定
+        targetPosition = startPosition + transform.forward * startMoveForward;
+        isMovingForwardAndCrouching = true;
     }
 
     void Update()
@@ -74,6 +84,28 @@ public class CameraController : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             return; // 視点回転・移動を無効化
+        }
+        
+        // 前進と座る動作を同時に行う
+        if (isMovingForwardAndCrouching)
+        {
+            float moveSpeed = 1.5f;
+            float crouchSpeed = crouchMoveSpeed;
+
+            // 前進
+            Vector3 newPos = Vector3.MoveTowards(transform.position, new Vector3(targetPosition.x, transform.position.y, targetPosition.z), moveSpeed * Time.deltaTime);
+            // 座る
+            float newY = Mathf.MoveTowards(transform.position.y, targetY, crouchSpeed * Time.deltaTime);
+            newPos.y = newY;
+            transform.position = newPos;
+
+            // 両方の目標に到達したら終了
+            if (Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(targetPosition.x, 0, targetPosition.z)) < 0.01f
+                && Mathf.Abs(transform.position.y - targetY) < 0.01f)
+            {
+                isMovingForwardAndCrouching = false;
+            }
+            return;
         }
 
         // --- 視点回転（常時マウス移動で回転） ---
