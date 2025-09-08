@@ -23,7 +23,7 @@ jobs:
       - name: Generate PlantUML diagram
         run: |
           mkdir -p uml
-          dotnet-pucd -o uml/unity_classes.puml ./**/*.cs
+          dotnet tool run plantumlclassdiagramgenerator -o uml/unity_classes.puml ./**/*.cs
 
       - name: Setup Java
         uses: actions/setup-java@v3
