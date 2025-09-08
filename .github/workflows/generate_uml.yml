@@ -3,8 +3,7 @@ name: Generate UML Diagram
 on:
   push:
     branches:
-      - ebi1
-  workflow_dispatch:
+      - main # または test
 
 jobs:
   generate-uml:
@@ -26,17 +25,22 @@ jobs:
           mkdir -p uml
           dotnet-pucd -o uml/unity_classes.puml ./**/*.cs
 
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+
+      - name: Generate UML image
+        run: |
+          curl -LJO https://github.com/plantuml/plantuml/releases/download/v1.2023.10/plantuml.jar
+          java -jar plantuml.jar uml/unity_classes.puml -o uml
+
       - name: Upload PlantUML file as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4 # v3をv4に更新
         with:
           name: plantuml-diagram
           path: uml/unity_classes.puml
-
-      - name: Generate UML image
-        uses: plantuml/plantuml-action@v2
-        with:
-          path: uml/unity_classes.puml
-          format: png
 
       - name: Add and commit UML diagram
         uses: stefanzweifel/git-auto-commit-action@v4
