@@ -3,7 +3,7 @@ name: Generate UML Diagram
 on:
   push:
     branches:
-      - main # または test
+      - ebi1
 
 jobs:
   generate-uml:
