@@ -15,7 +15,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '8.0.x' # プロジェクトの.NETバージョンに合わせて変更
+          dotnet-version: '9.0.x' # プロジェクトの.NETバージョンに合わせて変更
 
       - name: Install PlantUmlClassDiagramGenerator
         run: dotnet tool install -g PlantUmlClassDiagramGenerator
