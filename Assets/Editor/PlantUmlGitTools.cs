@@ -4,7 +4,7 @@ using System.IO;
 
 public static class PlantUmlGitTools
 {
-    const string InputDir  = "Assembly-CSharp.csproj";   // 必要なら Scripts に変更
+    const string InputDir  = "Assets/Script";   // 必要なら Scripts に変更
     const string OutputDir = "Docs/uml";
     const string PlantUmlJar = "plantuml.jar";  // Actions で curl で取得した jar を使う
 
