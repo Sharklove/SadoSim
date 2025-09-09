@@ -40,7 +40,7 @@ jobs:
           dotnet run --project build/UmlTool.csproj -c Release
 
       - name: Upload UML Diagrams
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: UML-Diagrams
           path: Docs/uml/*.svg
