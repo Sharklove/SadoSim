@@ -31,7 +31,7 @@ jobs:
         run: |
           mkdir -p build
           dotnet new console -n UmlTool -o build --force
-          cp Editor/PlantUmlGitTools.cs build/Program.cs
+          cp Assets/Editor/PlantUmlGitTools.cs build/Program.cs
           dotnet build build/UmlTool.csproj -c Release
 
       - name: Run UML Generator Tool
