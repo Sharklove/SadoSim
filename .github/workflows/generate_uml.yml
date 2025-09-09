@@ -37,9 +37,3 @@ jobs:
 
       - name: Run UML Generator Tool
         run: dotnet run --project build/UmlTool.csproj -c Release
-
-      - name: Upload UML Diagrams
-        uses: actions/upload-artifact@v3
-        with:
-          name: UML-Diagrams
-          path: Docs/uml/*.svg
