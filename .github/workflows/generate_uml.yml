@@ -17,9 +17,10 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
-      - name: Install PlantUML Class Diagram Generator
-        run: dotnet tool install PlantUmlClassDiagramGenerator --tool-path ./.dotnet/tools/Assembly-CSharp.csproj
-
+      # - name: Install PlantUML Class Diagram Generator
+      #   run: dotnet tool install PlantUmlClassDiagramGenerator --tool-path ./.dotnet/tools
+      - name: Generate UML Diagram
+        run: .dotnet/tools/plantumlclassdiagramgenerator --project Assembly-CSharp.csproj
       - name: Add tools to PATH
         run: echo "$GITHUB_WORKSPACE/.dotnet/tools" >> $GITHUB_PATH
 
