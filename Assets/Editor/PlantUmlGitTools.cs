@@ -12,7 +12,7 @@ public static class PlantUmlGitTools
     {
         Directory.CreateDirectory(OutputDir);
 
-        Run("puml-gen", $"{InputDir} {OutputDir} -dir -ignore bin,obj,Properties -createAssociation -allInOne");
+        Run("plantumlclassdiagramgenerator", $"{InputDir} {OutputDir} -dir -ignore bin,obj,Properties -createAssociation -allInOne");
         Run("java", $"-jar \"{PlantUmlJar}\" -tsvg \"{OutputDir}\"");
     }
 
