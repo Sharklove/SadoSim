@@ -8,6 +8,7 @@ on:
 jobs:
   generate-uml:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -17,18 +18,15 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
-      - name: Install PlantUML Class Diagram Generator
-        run: dotnet tool install PlantUmlClassDiagramGenerator --tool-path ./.dotnet/tools
-
-      - name: Add tools to PATH
-        run: echo "$GITHUB_WORKSPACE/.dotnet/tools" >> $GITHUB_PATH
-
-      - name: Generate UML Diagram
-        run: plantumlclassdiagramgenerator --project $GITHUB_WORKSPACE/Assembly-CSharp.csproj
-
       - name: Download PlantUML
         run: |
           curl -L -o plantuml.jar https://github.com/plantuml/plantuml/releases/latest/download/plantuml.jar
+
+      - name: Install puml-gen tool
+        run: dotnet tool install --global puml-gen
+
+      - name: Add global tools to PATH
+        run: echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
 
       - name: Build UML Generator Tool
         run: |
@@ -39,3 +37,9 @@ jobs:
 
       - name: Run UML Generator Tool
         run: dotnet run --project build/UmlTool.csproj -c Release
+
+      - name: Upload UML Diagrams
+        uses: actions/upload-artifact@v3
+        with:
+          name: UML-Diagrams
+          path: Docs/uml/*.svg
