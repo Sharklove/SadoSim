@@ -12,37 +12,27 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Setup .NET
+      - name: Install .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '8.0.x' # プロジェクトの.NETバージョンに合わせてください
+          dotnet-version: '8.0.x'
 
-      - name: Install tools
-        run: |
-          # PlantUmlClassDiagramGeneratorをインストール
-          dotnet tool install --global PlantUmlClassDiagramGenerator --project Assembly-CSharp.csproj
-          echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
+      - name: Install PlantUML Class Diagram Generator
+        run: dotnet tool install PlantUmlClassDiagramGenerator --tool-path ./.dotnet/tools
 
-      - name: Generate PlantUML puml file
-        run: |
-          mkdir -p Docs/uml
-          # C#コードのpumlファイルを生成
-          # Assets/Scriptというディレクトリがなければ、Assets/Scriptsに変更してください
-          puml-gen Assets/Script Docs/uml -dir -ignore bin,obj,Properties -createAssociation -allInOne
+      - name: Add tools to PATH
+        run: echo "$GITHUB_WORKSPACE/.dotnet/tools" >> $GITHUB_PATH
 
-      - name: Generate UML image
+      - name: Download PlantUML
         run: |
-          # PlantUMLとJava、Graphvizをインストール
-          sudo apt-get update
-          sudo apt-get install -y default-jre graphviz
-          # PlantUMLのjarファイルをダウンロード
           curl -L -o plantuml.jar https://github.com/plantuml/plantuml/releases/latest/download/plantuml.jar
-          # pumlファイルからSVG画像を生成
-          java -jar plantuml.jar -tsvg Docs/uml
 
-      - name: Add and commit UML diagram
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: 'Auto-generate UML diagram'
-          add_options: '--force'
-          file_pattern: 'Docs/uml/*.svg'
+      - name: Build UML Generator Tool
+        run: |
+          mkdir -p build
+          dotnet new console -n UmlTool -o build --force
+          cp Editor/PlantUmlGitTools.cs build/Program.cs
+          dotnet build build/UmlTool.csproj -c Release
+
+      - name: Run UML Generator Tool
+        run: dotnet run --project build/UmlTool.csproj -c Release
