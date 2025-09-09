@@ -20,7 +20,7 @@ jobs:
       - name: Install tools
         run: |
           # PlantUmlClassDiagramGeneratorをインストール
-          dotnet tool install --global PlantUmlClassDiagramGenerator
+          dotnet tool install --global PlantUmlClassDiagramGenerator --project Assembly-CSharp.csproj
           echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
 
       - name: Generate PlantUML puml file
