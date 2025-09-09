@@ -24,7 +24,7 @@ jobs:
         run: echo "$GITHUB_WORKSPACE/.dotnet/tools" >> $GITHUB_PATH
 
       - name: Generate UML Diagram
-        run: plantumlclassdiagramgenerator --project Assembly-CSharp.csproj
+        run: plantumlclassdiagramgenerator --project $GITHUB_WORKSPACE/Assembly-CSharp.csproj
 
       - name: Download PlantUML
         run: |
