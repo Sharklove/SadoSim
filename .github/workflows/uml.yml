@@ -12,7 +12,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Install PlantUML Class Diagram Generator
-        run: dotnet tool install PlantUmlClassDiagramGenerator --tool-path ./.dotnet/tools
+        run: dotnet tool install --global PlantUmlClassDiagramGenerator --project SadoSim.sln
       - name: Add tools to PATH
         run: echo "$GITHUB_WORKSPACE/.dotnet/tools" >> $GITHUB_PATH
       - name: Generate UML
