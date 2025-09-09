@@ -17,24 +17,15 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
-      - name: Install PlantUML Class Diagram Generator
-        run: dotnet tool install PlantUmlClassDiagramGenerator --tool-path ./.dotnet/tools
-      # - name: Install PlantUML Class Diagram Generator
-      #   run: dotnet tool install --global PlantUmlClassDiagramGenerator
-
-      - name: Add tools to PATH
-        run: echo "$GITHUB_WORKSPACE/.dotnet/tools" >> $GITHUB_PATH
-      # - name: Add global tools to PATH
-      #   run: echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
-
-      - name: Generate UML Diagram
-        run: plantumlclassdiagramgenerator --project $GITHUB_WORKSPACE/Assembly-CSharp.csproj
-      # - name: Generate UML Diagram
-      #   run: plantumlclassdiagramgenerator --project $GITHUB_WORKSPACE/Assembly-CSharp.csproj
-
       - name: Download PlantUML
         run: |
           curl -L -o plantuml.jar https://github.com/plantuml/plantuml/releases/latest/download/plantuml.jar
+
+      - name: Install puml-gen from GitHub
+        run: |
+          mkdir -p tools
+          curl -L -o tools/puml-gen https://github.com/gsf/PlantUmlClassDiagramGenerator/releases/latest/download/puml-gen
+          chmod +x tools/puml-gen
 
       - name: Build UML Generator Tool
         run: |
@@ -44,4 +35,12 @@ jobs:
           dotnet build build/UmlTool.csproj -c Release
 
       - name: Run UML Generator Tool
-        run: dotnet run --project build/UmlTool.csproj -c Release
+        run: |
+          export PATH="$PATH:$GITHUB_WORKSPACE/tools"
+          dotnet run --project build/UmlTool.csproj -c Release
+
+      - name: Upload UML Diagrams
+        uses: actions/upload-artifact@v3
+        with:
+          name: UML-Diagrams
+          path: Docs/uml/*.svg
