@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - run: dotnet tool install --global PlantUmlClassDiagramGenerator
+      - run: dotnet tool install --global PlantUmlClassDiagramGenerator --tool-path ./.dotnet/tools
       - run: echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
       - run: puml-gen Assets/Script Docs/uml -dir -ignore bin,obj,Properties -createAssociation -allInOne
       - run: |
