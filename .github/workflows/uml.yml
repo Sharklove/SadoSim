@@ -1,0 +1,18 @@
+name: Generate UML Diagram
+
+on:
+  push:
+    branches:
+      - ebi1
+
+jobs:
+  generate-uml:
+    runs-on: ubuntu-latest
+    steps:
+      - run: dotnet tool install --global PlantUmlClassDiagramGenerator
+      - run: echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
+      - run: puml-gen Assets/Script Docs/uml -dir -ignore bin,obj,Properties -createAssociation -allInOne
+      - run: |
+          sudo apt-get install -y default-jre graphviz
+          curl -L -o plantuml.jar https://github.com/plantuml/plantuml/releases/latest/download/plantuml.jar
+          java -jar plantuml.jar -tsvg Docs/uml

@@ -1,0 +1,8 @@
+@startuml
+class HideCanvas {
+    + Show() : void
+    + Hide() : void
+}
+MonoBehaviour <|-- HideCanvas
+HideCanvas --> "targetCanvas" Canvas
+@enduml

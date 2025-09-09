@@ -1,0 +1,50 @@
+@startuml
+class CameraController {
+    - moveSpeed : float = 5f
+    - sprintMultiplier : float = 2f
+    - lookSensitivity : float = 2.0f
+    - pitchMin : float
+    - pitchMax : float = 89f
+    - crouchHeight : float = 1.75f
+    - crouchMoveSpeed : float = 2f
+    - startMoveForward : float = 0.5f
+    - isCrouching : bool = true
+    - targetY : float
+    - yaw : float
+    - pitch : float
+    + {static} IsUIActive : bool = true
+    - isMovingForwardAndCrouching : bool = true
+    - Awake() : void
+    - Start() : void
+    - Update() : void
+    - HandleCrouch() : void
+    - MoveToY(targetY:float) : void
+}
+MonoBehaviour <|-- CameraController
+CameraController o-> "startPosition" Vector3
+CameraController o-> "startRotation" Vector3
+CameraController --> "targetPosition" Vector3
+class HideCanvas {
+    + Show() : void
+    + Hide() : void
+}
+MonoBehaviour <|-- HideCanvas
+HideCanvas --> "targetCanvas" Canvas
+class InputManager <<static>> {
+    + {static} GetMoveInput() : Vector2
+    + {static} IsSprint() : bool
+    + {static} IsCrouchPressed() : bool
+    + {static} IsMouseLook() : bool
+}
+class MainCamera {
+    - Start() : void
+}
+MonoBehaviour <|-- MainCamera
+MainCamera o-> "startPosition" Vector3
+MainCamera o-> "startRotation" Vector3
+class test {
+    - Start() : void
+    - Update() : void
+}
+MonoBehaviour <|-- test
+@enduml

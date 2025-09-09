@@ -1,0 +1,8 @@
+@startuml
+class InputManager <<static>> {
+    + {static} GetMoveInput() : Vector2
+    + {static} IsSprint() : bool
+    + {static} IsCrouchPressed() : bool
+    + {static} IsMouseLook() : bool
+}
+@enduml

@@ -1,0 +1,8 @@
+@startuml
+class MainCamera {
+    - Start() : void
+}
+MonoBehaviour <|-- MainCamera
+MainCamera o-> "startPosition" Vector3
+MainCamera o-> "startRotation" Vector3
+@enduml
