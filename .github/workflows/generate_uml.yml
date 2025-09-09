@@ -34,9 +34,11 @@ jobs:
           cp Assets/Editor/PlantUmlGitTools.cs build/Program.cs
           dotnet build build/UmlTool.csproj -c Release
 
+      - name: Add global tools to PATH
+        run: echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
+
       - name: Run UML Generator Tool
         run: |
-          export PATH="$PATH:$GITHUB_WORKSPACE/tools"
           dotnet run --project build/UmlTool.csproj -c Release
 
       - name: Upload UML Diagrams
