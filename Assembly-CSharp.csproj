@@ -48,12 +48,17 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.2.2f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Script\Sample\Models\Teacher.cs" />
     <Compile Include="Assets\Script\InputManager.cs" />
+    <Compile Include="Assets\Script\Sample\Models\Student.cs" />
     <Compile Include="Assets\Script\HideCanvas.cs" />
+    <Compile Include="Assets\Script\Sample\Models\Person.cs" />
+    <Compile Include="Assets\Script\Sample\Models\IWorker.cs" />
     <Compile Include="Assets\Script\MainCamera.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Tests\EditMode\PumlSequenceTests.cs" />
     <Compile Include="Assets\Script\test.cs" />
+    <Compile Include="Assets\Script\Sample\Program.cs" />
     <Compile Include="Assets\Script\CameraController.cs" />
   </ItemGroup>
   <ItemGroup>
