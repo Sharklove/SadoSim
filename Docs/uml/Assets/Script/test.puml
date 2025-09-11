@@ -1,7 +1,45 @@
 @startuml
-class test {
-    - Start() : void
-    - Update() : void
+
+package "Domain" {
+  class User {
+    - string id
+    - string name
+    - string email
+    - string passwordHash
+    + bool VerifyPassword(string password)
+  }
+
+  class Role {
+    - string name
+    - string[] permissions
+  }
+
+  class Session {
+    - string token
+    - DateTime expiresAt
+    + bool IsActive()
+  }
+
+  User "1" -- "*" Role : has
+  User "1" -- "1" Session : creates
 }
-MonoBehaviour <|-- test
+
+package "Service" {
+  class AuthService {
+    + Session Login(string email, string password)
+    + void Logout(string token)
+    + bool IsAuthorized(User user, string permission)
+  }
+
+  class UserService {
+    + User Register(string name, string email, string password)
+    + User GetById(string id)
+  }
+
+  AuthService --> User
+  AuthService --> Session
+  AuthService --> Role
+  UserService --> User
+}
+
 @enduml

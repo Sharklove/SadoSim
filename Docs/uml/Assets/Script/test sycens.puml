@@ -1,0 +1,60 @@
+@startuml
+title 注文フロー（在庫確認・決済・リトライ）
+
+actor Customer
+participant "WebApp\n(フロント)" as Web
+participant "Order Service" as Order
+participant "Inventory Service" as Stock
+participant "Payment Gateway" as Pay
+participant "Email Service" as Mail
+
+Customer -> Web : 注文リクエスト (商品ID, 数量)
+Web -> Order : POST /orders (payload)
+activate Order
+
+Order -> Stock : checkStock(productId, qty)
+activate Stock
+Stock --> Order : 在庫あり/在庫なし
+deactivate Stock
+
+alt 在庫あり
+    Order -> Pay : charge(cardInfo, amount)
+    activate Pay
+    alt 決済成功
+        Pay --> Order : success(paymentId)
+        deactivate Pay
+
+        Order -> Order : 保存(order -> status = "confirmed")
+        Order -> Mail : sendOrderConfirmation(customerEmail)
+        Order --> Web : 201 Created (orderId)
+        Web --> Customer : 注文確認画面
+    else 決済失敗
+        Pay --> Order : failed(reason)
+        deactivate Pay
+
+        loop 2 times
+            Order -> Pay : retryCharge(...)
+            alt リトライ成功
+                Pay --> Order : success(paymentId)
+                break
+            else
+                Pay --> Order : failed
+            end
+        end
+
+        alt 決済成功(リトライ後)
+            Order -> Mail : sendOrderConfirmation(customerEmail)
+            Order --> Web : 201 Created (orderId)
+            Web --> Customer : 注文確認画面
+        else 全て失敗
+            Order --> Web : 402 Payment Required
+            Web --> Customer : 決済失敗メッセージ
+        end
+    end
+else 在庫なし
+    Order --> Web : 409 Conflict (out of stock)
+    Web --> Customer : 在庫なしメッセージ
+end
+
+deactivate Order
+@enduml

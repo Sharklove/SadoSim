@@ -1,0 +1,60 @@
+@startuml
+title ECサイト ER図
+
+!define Table(name,desc) class name as "desc" << (T,#FFAAAA) >>
+!define PK(x) <b><color:DarkBlue>x</color></b>
+!define FK(x) <color:DarkGreen>x</color>
+
+' ====== エンティティ定義 ======
+
+Table(Customer, "顧客") {
+  PK(customer_id): int
+  name: varchar
+  email: varchar
+  phone: varchar
+  address: text
+  created_at: datetime
+}
+
+Table(Product, "商品") {
+  PK(product_id): int
+  name: varchar
+  description: text
+  price: decimal
+  stock_quantity: int
+  created_at: datetime
+}
+
+Table(Order, "注文") {
+  PK(order_id): int
+  FK(customer_id): int
+  order_date: datetime
+  status: varchar
+  total_amount: decimal
+}
+
+Table(OrderItem, "注文明細") {
+  PK(order_item_id): int
+  FK(order_id): int
+  FK(product_id): int
+  quantity: int
+  price: decimal
+}
+
+Table(Payment, "支払い") {
+  PK(payment_id): int
+  FK(order_id): int
+  payment_date: datetime
+  amount: decimal
+  method: varchar
+  status: varchar
+}
+
+' ====== リレーション ======
+
+Customer ||--o{ Order : places
+Order ||--o{ OrderItem : contains
+Product ||--o{ OrderItem : includes
+Order ||--o{ Payment : has
+
+@enduml
