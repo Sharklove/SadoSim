@@ -17,8 +17,8 @@ public class Move : MonoBehaviour
     void Update()
     {
         // WASD 入力を取得（x=横移動, z=前後移動）
-        float h = Input.GetAxis("Horizontal"); // A,Dキー or ←,→
-        float v = Input.GetAxis("Vertical");   // W,Sキー or ↑,↓
+        float h = Input.GetAxisRaw("Horizontal"); // A,Dキー or ←,→
+        float v = Input.GetAxisRaw("Vertical");   // W,Sキー or ↑,↓
 
         Vector3 move = transform.right * h + transform.forward * v;
 
