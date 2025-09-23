@@ -10,6 +10,7 @@ public class CameraLook : MonoBehaviour
 
     void Update()
     {
+        if (UIManager.IsUIActive) return;
         // マウスの上下の動きを取得
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");

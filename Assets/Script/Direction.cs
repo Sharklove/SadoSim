@@ -6,6 +6,7 @@ public class Direction : MonoBehaviour
 
     void Update()
     {
+        if (UIManager.IsUIActive) return;
         // マウスのX軸の動きを取得
         float mouseX = Input.GetAxis("Mouse X");
 
