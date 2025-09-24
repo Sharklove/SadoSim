@@ -1,65 +1,43 @@
-// using UnityEngine;
-
-// [RequireComponent(typeof(CharacterController))]
-// public class Sit : MonoBehaviour
-// {
-//     private CharacterController controller;
-//     private float originalHeight = 1f;
-//     public float crouchHeight = 0.55f;
-//     public static bool isCrouching = false;
-
-//     void Start()
-//     {
-//         controller = GetComponent<CharacterController>();
-//     }
-
-//     void Update()
-//     {
-//         if (Input.GetKeyDown(KeyCode.C))
-//         {
-//             isCrouching = !isCrouching; // 状態を反転させる
-//         }
-        
-//         // オブジェクトのスケールを更新
-//         Vector3 newScale = transform.localScale;
-//         newScale.y = isCrouching ? crouchHeight : originalHeight;
-//         transform.localScale = newScale;
-//     }
-// }
 using UnityEngine;
 
-[RequireComponent(typeof(CharacterController))]
-public class Sit : MonoBehaviour
+public class Sit : MonoBehaviour // しゃがみ動作を制御するクラス
 {
-    private CharacterController controller;
-    private float originalHeight = 1f;
-    public float crouchHeight = 0.55f;
-    public float crouchSpeed = 5f; // しゃがむ速度
-    public static bool isCrouching = false;
+    private float originalHeight = 1f; // 元の高さ
+    public float crouchHeight = 0.625f; // しゃがんだときの高さ
+    public float crouchSpeed = 1f; // しゃがむ速度
+    public static bool isCrouching = false; // しゃがんでいるかどうか
 
-    private float currentHeight = 1f;
+    private float currentHeight = 1f; // 現在の高さ
 
     void Start()
     {
-        controller = GetComponent<CharacterController>();
-        currentHeight = originalHeight;
+        currentHeight = originalHeight; // 初期化
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetKeyDown(KeyCode.C)) // Cキーが押されたとき
         {
             isCrouching = !isCrouching; // 状態を反転
         }
 
-        // 目標の高さを決定
-        float targetHeight = isCrouching ? crouchHeight : originalHeight;
-        // 毎フレーム補間してスムーズに変化
-        currentHeight = Mathf.Lerp(currentHeight, targetHeight, Time.deltaTime * crouchSpeed);
+        float targetHeight = isCrouching ? crouchHeight : originalHeight; // 目標の高さを決定
+
+        float previousHeight = currentHeight; // 前の高さを保存
+        
+        // currentHeight = Mathf.Lerp(currentHeight, targetHeight, Time.deltaTime * crouchSpeed);
+        currentHeight = Mathf.MoveTowards(currentHeight, targetHeight, Time.deltaTime * crouchSpeed); // 毎フレーム補間してスムーズに変化
 
         // オブジェクトの見た目のスケールを更新
         Vector3 newScale = transform.localScale;
         newScale.y = currentHeight;
         transform.localScale = newScale;
+
+        if (!isCrouching)
+        {
+            // スケールの変化分を位置に反映
+            float heightDifference = currentHeight - previousHeight;
+            transform.position += new Vector3(0, heightDifference * 2, 0);
+        }
     }
 }
