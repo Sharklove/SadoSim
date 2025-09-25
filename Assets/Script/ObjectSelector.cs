@@ -1,0 +1,44 @@
+using UnityEngine;
+
+public class ObjectSelector : MonoBehaviour
+{
+    public string selectableTag = "Selectable";
+    public Material highlightMaterial;
+
+    private Transform _selection;
+    private Material _originalMaterial;
+
+    void Update()
+    {
+        // 前回選択していたオブジェクトをリセット
+        if (_selection != null)
+        {
+            var selectionRenderer = _selection.GetComponent<Renderer>();
+            if (selectionRenderer != null && _originalMaterial != null)
+            {
+                selectionRenderer.material = _originalMaterial;
+            }
+            _selection = null;
+        }
+
+        // 中心からRayを飛ばす
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+        RaycastHit hit;
+
+        // Rayが何かに当たった場合のみ処理
+        if (Physics.Raycast(ray, out hit))
+        {
+            var selection = hit.transform;
+            if (selection != null && selection.CompareTag(selectableTag))
+            {
+                var selectionRenderer = selection.GetComponent<Renderer>();
+                if (selectionRenderer != null && highlightMaterial != null)
+                {
+                    _originalMaterial = selectionRenderer.material;
+                    selectionRenderer.material = highlightMaterial;
+                }
+                _selection = selection;
+            }
+        }
+    }
+}
