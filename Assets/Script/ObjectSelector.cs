@@ -4,6 +4,7 @@ public class ObjectSelector : MonoBehaviour
 {
     public string selectableTag = "Selectable";
     public Material highlightMaterial;
+    public float rayLength = 2f;
 
     private Transform _selection;
     private Material _originalMaterial;
@@ -26,7 +27,7 @@ public class ObjectSelector : MonoBehaviour
         RaycastHit hit;
 
         // Rayが何かに当たった場合のみ処理
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit, rayLength))
         {
             var selection = hit.transform;
             if (selection != null && selection.CompareTag(selectableTag))
