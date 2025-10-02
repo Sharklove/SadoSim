@@ -26,7 +26,6 @@ public class ObjectSelector : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
         RaycastHit hit;
 
-        // Rayが何かに当たった場合のみ処理
         if (Physics.Raycast(ray, out hit, rayLength))
         {
             var selection = hit.transform;
@@ -39,6 +38,16 @@ public class ObjectSelector : MonoBehaviour
                     selectionRenderer.material = highlightMaterial;
                 }
                 _selection = selection;
+
+                // クリックされたら DotweenTest を動かす
+                if (Input.GetMouseButtonDown(0))
+                {
+                    var mover = selection.GetComponent<DotweenTest>();
+                    if (mover != null)
+                    {
+                        mover.MoveToTarget();
+                    }
+                }
             }
         }
     }

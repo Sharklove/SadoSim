@@ -3,10 +3,19 @@ using DG.Tweening;
 
 public class DotweenTest : MonoBehaviour
 {
-    void Start()
+    public Transform targetPosition; // 移動先
+    public float duration = 2f;      // 移動時間
+
+    public void MoveToTarget()
     {
-        // 2秒かけて右に移動
-        transform.DOMove(new Vector3(3, 0, 0), 2f)
-                 .SetEase(Ease.InOutQuad);
+        if (targetPosition != null)
+        {
+            transform.DOMove(targetPosition.position, duration)
+                     .SetEase(Ease.InOutSine);
+        }
+        else
+        {
+            Debug.LogWarning("ターゲット位置が設定されていません！");
+        }
     }
 }
