@@ -5,6 +5,7 @@ public class ObjectSelector : MonoBehaviour
     public string selectableTag = "Selectable";
     public Material highlightMaterial;
     public float rayLength = 2f;
+    public Vector3 LastHitPosition { get; private set; } = Vector3.zero;
 
     private Transform _selection;
     private Material _originalMaterial;
@@ -27,19 +28,15 @@ public class ObjectSelector : MonoBehaviour
 
         // Rayを発射
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
-            RaycastHit hit;
+        RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, rayLength))
+        if (Physics.Raycast(ray, out hit, rayLength))
+        {
+            LastHitPosition = hit.point; // 最後にヒットした位置を保存
+            // Debug.Log($"Raycast hit: {hit.transform.name} at {LastHitPosition}");
+            var selection = hit.transform;
+            if (selection != null && selection.CompareTag(selectableTag))
             {
-                // 🌟 座標の取得はここで行う 🌟
-                Vector3 hitPosition = hit.point;
-                
-                // デバッグ出力
-                Debug.Log("Rayがオブジェクトに当たったワールド座標: " + hitPosition.ToString());
-
-                var selection = hit.transform;
-                if (selection != null && selection.CompareTag(selectableTag))
-                {
                 var renderer = selection.GetComponent<Renderer>();
                 if (renderer != null && highlightMaterial != null)
                 {
@@ -48,6 +45,10 @@ public class ObjectSelector : MonoBehaviour
                 }
                 _selection = selection;
             }
+        }
+        else
+        {
+            LastHitPosition = Vector3.zero; // ヒットしなかった場合はゼロベクトルを設定
         }
     }
 }
