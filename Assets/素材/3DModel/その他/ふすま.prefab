@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 2817502440870720211}
   - component: {fileID: 4038243433193228844}
   - component: {fileID: 2397569974090738785}
+  - component: {fileID: 3313452611974988138}
+  - component: {fileID: 1227516801358090620}
   m_Layer: 0
   m_Name: Cube (7)
   m_TagString: Selectable
@@ -111,6 +113,36 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3313452611974988138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3406210581733580749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28c17fe81d0aefd429f2f2c550e1af87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DotweenMover
+  originalPosition: {x: 0, y: 0, z: 0}
+  targetPosition: {x: 0, y: 0, z: 0}
+  duration: 0.5
+  moveParent: 1
+  moved: 0
+--- !u!114 &1227516801358090620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3406210581733580749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cf2b6e32b79ca6448f268c141f9cbd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractableObject
+  type: 1
 --- !u!1 &3979633198962534791
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,6 +155,8 @@ GameObject:
   - component: {fileID: 7588142868848634947}
   - component: {fileID: 8527600856242077759}
   - component: {fileID: 3749644474248354814}
+  - component: {fileID: 8173019018818331078}
+  - component: {fileID: 2333974632385716038}
   m_Layer: 0
   m_Name: Cube (6)
   m_TagString: Selectable
@@ -222,6 +256,36 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8173019018818331078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3979633198962534791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28c17fe81d0aefd429f2f2c550e1af87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DotweenMover
+  originalPosition: {x: 0, y: 0, z: 0}
+  targetPosition: {x: 0, y: 0, z: 0}
+  duration: 0.5
+  moveParent: 1
+  moved: 0
+--- !u!114 &2333974632385716038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3979633198962534791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cf2b6e32b79ca6448f268c141f9cbd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractableObject
+  type: 1
 --- !u!1 &6695471400900196776
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,6 +333,8 @@ GameObject:
   - component: {fileID: 4338387721055315814}
   - component: {fileID: 51183633400676391}
   - component: {fileID: 6587989190064435551}
+  - component: {fileID: 8992088042298404256}
+  - component: {fileID: 1255271060662441637}
   m_Layer: 0
   m_Name: Cube (5)
   m_TagString: Selectable
@@ -368,6 +434,36 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8992088042298404256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6846755111072013592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28c17fe81d0aefd429f2f2c550e1af87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DotweenMover
+  originalPosition: {x: 0, y: 0, z: 0}
+  targetPosition: {x: 0, y: 0, z: 0}
+  duration: 0.5
+  moveParent: 1
+  moved: 0
+--- !u!114 &1255271060662441637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6846755111072013592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cf2b6e32b79ca6448f268c141f9cbd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractableObject
+  type: 1
 --- !u!1 &8520617389696408329
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,6 +476,8 @@ GameObject:
   - component: {fileID: 628748806583895864}
   - component: {fileID: 4964154569121091654}
   - component: {fileID: 4646183520143035387}
+  - component: {fileID: 2946715469281088832}
+  - component: {fileID: 4135648864280912013}
   m_Layer: 0
   m_Name: Cube (4)
   m_TagString: Selectable
@@ -479,3 +577,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2946715469281088832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8520617389696408329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28c17fe81d0aefd429f2f2c550e1af87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DotweenMover
+  originalPosition: {x: 0, y: 0, z: 0}
+  targetPosition: {x: 0, y: 0, z: 0}
+  duration: 0.5
+  moveParent: 1
+  moved: 0
+--- !u!114 &4135648864280912013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8520617389696408329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cf2b6e32b79ca6448f268c141f9cbd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractableObject
+  type: 1
