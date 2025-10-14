@@ -176,6 +176,10 @@ public class CameraController : MonoBehaviour
             transform.position = pos;
         }
     }
+    public void MoveTo(Vector3 newPosition)
+    {
+        transform.position = newPosition;
+    }
 }
 
 
