@@ -18,7 +18,7 @@ public class Move : MonoBehaviour
     {
         if (UIManager.IsUIActive) return;
         if (Sit.isSiting) return; // しゃがんでいるときは移動を無効化
-        // WASD 入力を取得（x=横移動, z=前後移動）
+        // W A S D 入力を取得（x=横移動, z=前後移動）
         float h = Input.GetAxisRaw("Horizontal"); // A,Dキー or ←,→
         float v = Input.GetAxisRaw("Vertical");   // W,Sキー or ↑,↓
 

@@ -23,6 +23,7 @@ public class ObjectPicker : MonoBehaviour
                     // 左手に物を持っていたら、視線の先に左手に持っているものを置く
                     Transform heldObject = newParent.GetChild(2);
                     heldObject.SetParent(null);
+                    heldObject.localRotation = Quaternion.identity;
                     heldObject.localPosition = selector.LastHitPosition;
 
                     LeftHand.isGrabbing = false;
