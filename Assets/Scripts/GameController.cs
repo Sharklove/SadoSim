@@ -1,14 +1,21 @@
 using UnityEngine;
+using System;
 
-public class GameController : MonoBehaviour
+[Serializable]
+public class PlayerSettings
 {
-    // ゲーム全体の管理を行うクラス
     public GameObject Player;
     public Vector3 startPosition;
+}
+public class GameController : MonoBehaviour
+{
+    [Tooltip("プレイヤーの設定")]
+    public PlayerSettings playerSettings;
+    
     void Start()
     {
         // ゲーム開始時の初期化処理
-        Player.transform.position = startPosition;
+        playerSettings.Player.transform.position = playerSettings.startPosition;
     }
 
     void Update()
