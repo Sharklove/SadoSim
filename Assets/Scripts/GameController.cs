@@ -14,8 +14,7 @@ public class GameController : MonoBehaviour
     
     void Start()
     {
-        // ゲーム開始時の初期化処理
-        playerSettings.Player.transform.position = playerSettings.startPosition;
+        playerSettings.Player.GetComponent<Player>().Move(playerSettings.startPosition);
     }
 
     void Update()
