@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Sit : MonoBehaviour // しゃがみ動作を制御するクラス
+public class Sit : MonoBehaviour
 {
     private float originalHeight = 1f; // 元の高さ
     public float sitHeight = 0.625f; // しゃがんだときの高さ
