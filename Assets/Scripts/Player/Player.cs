@@ -1,11 +1,14 @@
 using UnityEngine;
+using System.Collections;
 
 public class Player : MonoBehaviour
 {
     private CharacterController controller;
     private Vector3 velocity;
-    private bool isSitting = false;
     private float originalHeight = 1.6f;
+
+    public static bool isSitting = false;
+    public static bool IsInteraction = false;
 
     void Awake()
     {
@@ -35,23 +38,38 @@ public class Player : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
     }
 
-    // public void Sit(float sitHeight, float sitSpeed)
-    // {
-    //     isSitting = true;
-    //     float t = sitSpeed * Time.deltaTime;
-    //     controller.height = Mathf.MoveTowards(originalHeight, sitHeight, t);
-    //     controller.center = new Vector3(0, controller.height / 2, 0);
-    // }
-    public void Sit()
+    public Coroutine Sit(float sitHeight, float sitSpeed)
     {
         isSitting = true;
+        IsInteraction = true;
+        return StartCoroutine(SitCoroutine(sitHeight, sitSpeed));
     }
-    void Update()
+
+    public Coroutine Stand(float sitSpeed)
     {
-        if (isSitting && controller.height > 1.0f)
+        isSitting = false;
+        IsInteraction = true;
+        return StartCoroutine(SitCoroutine(originalHeight, sitSpeed));
+    }
+
+    private IEnumerator SitCoroutine(float targetHeight, float speed)
+    {
+        while (controller.height != targetHeight)
         {
-            controller.height = Mathf.Lerp(controller.height, originalHeight, Time.deltaTime * 1f);
-            controller.center = new Vector3(0, controller.height / 2, 0);
+            float newHeight = Mathf.MoveTowards(
+                controller.height,
+                targetHeight,
+                Time.deltaTime * speed
+            );
+            if (!isSitting)
+            {
+                float heightDifference = newHeight - controller.height;
+                transform.position += new Vector3(0, heightDifference * 2, 0);
+            }
+            controller.height = newHeight;
+            controller.center = new Vector3(0, (originalHeight / 2f) + (originalHeight - newHeight) / 2f, 0);
+            yield return null;
         }
+        IsInteraction = false;
     }
 }

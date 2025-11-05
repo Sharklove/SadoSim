@@ -10,7 +10,9 @@ public class PlayerSettings
     public Vector3 startPosition;
     [Tooltip("移動速度")]
     public float moveSpeed = 2f;
+    [Tooltip("座った時の高さ")]
     public float sitHeight = 1f;
+    [Tooltip("座る速度")]
     public float sitSpeed = 1f;
     [Header("Camera設定")]
     [Tooltip("マウス感度左右")]
@@ -51,9 +53,17 @@ public class GameController : MonoBehaviour
         cameraController.ChangeAngles(mouseY * playerSettings.sensitivity * Time.deltaTime, playerSettings.minY, playerSettings.maxY);
         player.Move(h, v, playerSettings.moveSpeed);
 
+        if (Player.IsInteraction) return;
         if (Input.GetKeyDown(KeyCode.C))
         {
-            player.Sit();
+            if(Player.isSitting)
+            {
+                player.Stand(playerSettings.sitSpeed);
+            }
+            else
+            {
+                player.Sit(playerSettings.sitHeight, playerSettings.sitSpeed);
+            }
         }
     }
 }
