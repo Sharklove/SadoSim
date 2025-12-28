@@ -72,5 +72,6 @@
         "Interactable",
         "Lerp",
         "Pickable"
-    ]
+    ],
+    "workbench.activityBar.orientation": "vertical"
 }
