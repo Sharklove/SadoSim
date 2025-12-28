@@ -9,8 +9,8 @@ public class ObjectPicker : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0)) {
             Transform selection = selector.CurrentSelection;
-            var boj = selection?.GetComponent<InteractableObject>();
-            var type = boj?.type;
+            var obj = selection?.GetComponent<InteractableObject>();
+            var type = obj?.type;
             if (type == ObjectType.Moveable) {
                 // アタッチされているDotweenを実行
                 var mover = selection.GetComponent<DotweenMover>();
