@@ -1,12 +1,24 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// ゲームを再開するボタンの機能を提供するクラス
+/// </summary>
 public class RestartButton : MonoBehaviour
 {
+    /// <summary>
+    /// 現在のシーンを再読み込みしてゲームを再開
+    /// </summary>
     public void RestartGame()
     {
-        // 現在のシーンを再読み込み
         Scene currentScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(currentScene.name);
+        if (currentScene != null)
+        {
+            SceneManager.LoadScene(currentScene.name);
+        }
+        else
+        {
+            Debug.LogError("RestartButton: 現在のシーンを取得できませんでした。");
+        }
     }
 }
