@@ -44,7 +44,7 @@ public class GameController : MonoBehaviour
     [Tooltip("プレイヤー設定")]
     public PlayerSettings playerSettings;
 
-    private Player player;
+    private PlayerController playerController;
     private CameraController cameraController;
 
     void Awake()
@@ -58,8 +58,8 @@ public class GameController : MonoBehaviour
         }
 
         // Playerコンポーネントを取得
-        player = playerSettings.Player.GetComponent<Player>();
-        if (player == null)
+        playerController = playerSettings.Player.GetComponent<PlayerController>();
+        if (playerController == null)
         {
             Debug.LogError($"GameController: {playerSettings.Player.name}にPlayerコンポーネントが見つかりません。");
             enabled = false;
@@ -76,16 +76,16 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        if (player != null)
+        if (playerController != null)
         {
-            player.Teleportation(playerSettings.startPosition);
+            playerController.Teleportation(playerSettings.startPosition);
         }
     }
 
     void Update()
     {
         // 必要なコンポーネントがない場合は処理をスキップ
-        if (player == null)
+        if (playerController == null)
         {
             return;
         }
@@ -96,7 +96,7 @@ public class GameController : MonoBehaviour
         float v = Input.GetAxisRaw("Vertical");
 
         // プレイヤーの回転
-        player.Rotate(mouseX * playerSettings.rotationSpeed * Time.deltaTime);
+        playerController.Rotate(mouseX * playerSettings.rotationSpeed * Time.deltaTime);
 
         // カメラの角度変更
         if (cameraController != null)
@@ -109,10 +109,10 @@ public class GameController : MonoBehaviour
         }
 
         // プレイヤーの移動
-        player.Move(h, v, playerSettings.moveSpeed);
+        playerController.Move(h, v, playerSettings.moveSpeed);
 
         // インタラクション中は座る/立つ操作を無効化
-        if (Player.IsInteraction)
+        if (PlayerController.IsInteraction)
         {
             return;
         }
@@ -120,13 +120,13 @@ public class GameController : MonoBehaviour
         // 座る/立つ操作（Cキー）
         if (Input.GetKeyDown(KeyCode.C))
         {
-            if (Player.isSitting)
+            if (PlayerController.isSitting)
             {
-                player.Stand(playerSettings.sitSpeed);
+                playerController.Stand(playerSettings.sitSpeed);
             }
             else
             {
-                player.Sit(playerSettings.sitHeight, playerSettings.sitSpeed);
+                playerController.Sit(playerSettings.sitHeight, playerSettings.sitSpeed);
             }
         }
     }

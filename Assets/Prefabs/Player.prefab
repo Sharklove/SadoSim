@@ -163,6 +163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ObjectPicker
   selector: {fileID: 5915516156779702735}
   newParent: {fileID: 6272664741762529335}
+  heldObjectChildIndex: 2
 --- !u!114 &961583891524907993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,7 +185,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3407990048319857031}
-  - component: {fileID: 5998489191323827836}
   - component: {fileID: 8240327565142785544}
   m_Layer: 0
   m_Name: Player
@@ -210,18 +210,6 @@ Transform:
   - {fileID: 7050231544364343432}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5998489191323827836
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1187442112563270222}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcdb5a151567cb340baeda15058b81eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Player
 --- !u!143 &8240327565142785544
 CharacterController:
   m_ObjectHideFlags: 0
