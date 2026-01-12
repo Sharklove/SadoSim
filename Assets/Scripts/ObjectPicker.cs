@@ -5,8 +5,8 @@ using UnityEngine;
 /// </summary>
 public class ObjectPicker : MonoBehaviour
 {
-    [Tooltip("オブジェクト選択用のObjectSelectorコンポーネント")]
-    public ObjectSelector selector;
+    [Tooltip("オブジェクト選択用のCameraControllerコンポーネント")]
+    public CameraController selector;
     
     [Tooltip("オブジェクトを保持する親Transform（例: PlayerHand）")]
     public Transform newParent;

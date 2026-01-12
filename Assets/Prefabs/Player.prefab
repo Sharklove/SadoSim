@@ -141,7 +141,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 975082784817626303}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f3a0f7c08730ce440a6f7929be07ba75, type: 3}
   m_Name: 
@@ -161,7 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9e04dc5eea5946419daf06aaa176dd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObjectPicker
-  selector: {fileID: 5915516156779702735}
+  selector: {fileID: 961583891524907993}
   newParent: {fileID: 6272664741762529335}
   heldObjectChildIndex: 2
 --- !u!114 &961583891524907993
@@ -176,6 +176,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 614e5409638807145b8b19ba456cf71d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraController
+  selectableTag: Selectable
+  highlightMaterial: {fileID: 462913497673626087, guid: b3ac9ecd80aa33f40823c189d50929ea, type: 3}
+  rayLength: 2
 --- !u!1 &1187442112563270222
 GameObject:
   m_ObjectHideFlags: 0
